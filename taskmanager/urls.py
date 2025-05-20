@@ -14,7 +14,6 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-# itdiary/urls.py
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
@@ -22,9 +21,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('main.urls')),  # Подключаем маршруты из приложения main
-    path('accounts/', include('django.contrib.auth.urls')),  # <-- вот эта строка важна!
-    path('', include('main.urls')), # в основном urls.py (например, freelance_platform/urls.py)
+    path('', include('main.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
 
 if settings.DEBUG:

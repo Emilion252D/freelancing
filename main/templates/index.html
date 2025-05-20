@@ -8,11 +8,11 @@
 
         {% if user.is_authenticated %}
             <h4 class="mb-4">Привет, {{ user.username }} 👋</h4>
-            <a href="{% url 'create_project' %}" class="btn btn-success btn-lg me-3">➕ Добавить проект</a>
-            <a href="{% url 'project_list' %}" class="btn btn-outline-primary btn-lg">📂 Посмотреть проекты</a>
+            <a href="{% url 'main:create_project' %}" class="btn btn-success btn-lg me-3">➕ Добавить проект</a>
+            <a href="{% url 'main:project_list' %}" class="btn btn-outline-primary btn-lg">📂 Посмотреть проекты</a>
         {% else %}
-            <a href="{% url 'register' %}" class="btn btn-success btn-lg me-3">Регистрация</a>
-            <a href="{% url 'login' %}" class="btn btn-outline-primary btn-lg">Вход</a>
+            <a href="{% url 'main:register' %}" class="btn btn-success btn-lg me-3">Регистрация</a>
+            <a href="{% url 'main:login' %}" class="btn btn-outline-primary btn-lg">Вход</a>
         {% endif %}
     </div>
 </div>

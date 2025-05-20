@@ -1,62 +1,95 @@
 {% extends 'base.html' %}
+{% load custom_filters %}
 {% load static %}
-
 {% block title %}Профиль{% endblock %}
-
 {% block content %}
-<div class="card p-4">
-
-    <div class="d-flex align-items-center mb-3">
-        {% if user_profile.avatar %}
-            <img src="{{ user_profile.avatar.url }}" alt="Аватар" class="rounded-circle me-3" width="100" height="100">
-        {% else %}
-            <img src="{% static 'img/default-avatar.png' %}" alt="Нет аватара" class="rounded-circle me-3" width="100" height="100">
-        {% endif %}
-
+<div class="card shadow-sm p-4 mb-4 {% if request.COOKIES.theme == 'dark' %}bg-dark text-light{% endif %}">
+    <div class="d-flex align-items-center mb-4">
+        <div class="me-4">
+            {% if user_profile.avatar %}
+                <img src="{{ user_profile.avatar.url }}" alt="Аватар" class="rounded-circle shadow-sm" width="100" height="100">
+            {% else %}
+                <img src="{% static 'img/default-avatar.png' %}" alt="Нет аватара" class="rounded-circle shadow-sm" width="100" height="100">
+            {% endif %}
+        </div>
         <div>
-            <h3>Профиль: {{ user_profile.username }}</h3>
-            <p>Email: {{ user_profile.email }}</p>
-            <p>Имя: {{ user_profile.first_name|default:"(не указано)" }}</p>
-            <p>Фамилия: {{ user_profile.last_name|default:"(не указано)" }}</p>
+            <h3 class="mb-1">{{ user_profile.username }}</h3>
+            <span class="badge {% if user_profile.is_client %}bg-info{% elif user_profile.is_freelancer %}bg-success{% else %}bg-secondary{% endif %}">
+                {{ user_profile.get_role }}
+            </span>
+            <p class="mt-2 mb-1 {% if request.COOKIES.theme == 'dark' %}text-light{% else %}text-muted{% endif %}">Email: {{ user_profile.email }}</p>
+            <p class="mb-1 {% if request.COOKIES.theme == 'dark' %}text-light{% else %}text-muted{% endif %}">Имя: {{ user_profile.first_name|default:"(не указано)" }}</p>
+            <p class="mb-1 {% if request.COOKIES.theme == 'dark' %}text-light{% else %}text-muted{% endif %}">Фамилия: {{ user_profile.last_name|default:"(не указано)" }}</p>
+            {% if user_profile.bio %}
+    <p class="mb-1 {% if request.COOKIES.theme == 'dark' %}text-light{% else %}text-muted{% endif %}">
+        <strong>О себе:</strong> {{ user_profile.bio }}
+    </p>
+{% endif %}
+
         </div>
     </div>
-
     {% if reviews %}
-        <p>Средняя оценка:</p>
-        <div class="d-flex align-items-center">
-          {% for i in "12345" %}
-            {% if forloop.counter <= average_rating|floatformat:"0" %}
-              <i class="bi bi-star-fill text-warning fs-5 me-1"></i>
-            {% else %}
-              <i class="bi bi-star text-muted fs-5 me-1"></i>
-            {% endif %}
-          {% endfor %}
-          <span class="ms-2">({{ average_rating|floatformat:"1" }})</span>
+        <div>
+            <p class="fw-bold mb-1">Средняя оценка:</p>
+            <div class="d-flex align-items-center">
+                {% with stars=average_rating|star_rating %}
+                    {% for s in stars %}
+                        {% if s == 'full' %}
+                            <i class="bi bi-star-fill text-warning fs-5 me-1"></i>
+                        {% elif s == 'half' %}
+                            <i class="bi bi-star-half text-warning fs-5 me-1"></i>
+                        {% else %}
+                            <i class="bi bi-star {% if request.COOKIES.theme == 'dark' %}text-light{% else %}text-muted{% endif %} fs-5 me-1"></i>
+                        {% endif %}
+                    {% endfor %}
+                {% endwith %}
+                <span class="ms-2 {% if request.COOKIES.theme == 'dark' %}text-light{% else %}text-muted{% endif %}">
+                    ({{ average_rating|floatformat:"1" }})
+                </span>
+            </div>
         </div>
     {% else %}
-        <p>Пока нет отзывов.</p>
+        <p class="{% if request.COOKIES.theme == 'dark' %}text-light{% else %}text-muted{% endif %}">Пока нет отзывов.</p>
     {% endif %}
 </div>
 
-{% if can_review %}
-    <a href="{% url 'leave_review' user_profile.id project_id=1 %}" class="btn btn-primary mt-3">Оставить отзыв</a>
+{% if can_review and project_id %}
+    <a href="{% url 'leave_review' user_profile.id project_id=project_id %}" class="btn btn-primary mb-4">✍️ Оставить отзыв</a>
 {% endif %}
 
-<hr>
+<hr class="{% if request.COOKIES.theme == 'dark' %}border-light{% endif %}">
 
-<h4>Отзывы:</h4>
+<h4 class="mb-3">Отзывы</h4>
 {% if reviews %}
     {% for review in reviews %}
-        <div class="border p-3 mb-3">
-            <p><strong>От:</strong> {{ review.reviewer.username }}</p>
-            <p><strong>Проект:</strong> {{ review.project.title }}</p>
-            <p><strong>Оценка:</strong> {{ review.rating }} ⭐</p>
-            <p><strong>Комментарий:</strong> {{ review.comment }}</p>
+        <div class="card mb-3 shadow-sm {% if request.COOKIES.theme == 'dark' %}bg-dark text-light{% endif %}">
+            <div class="card-body">
+                <p class="mb-1"><strong>От:</strong> {{ review.reviewer.username }}</p>
+                <p class="mb-1"><strong>Проект:</strong> {{ review.project.title }}</p>
+                <p class="mb-1"><strong>Оценка:</strong>
+                    {% with stars=review.rating|star_rating %}
+                        {% for s in stars %}
+                            {% if s == 'full' %}
+                                <i class="bi bi-star-fill text-warning fs-5 me-1"></i>
+                            {% elif s == 'half' %}
+                                <i class="bi bi-star-half text-warning fs-5 me-1"></i>
+                            {% else %}
+                                <i class="bi bi-star {% if request.COOKIES.theme == 'dark' %}text-light{% else %}text-muted{% endif %} fs-5 me-1"></i>
+                            {% endif %}
+                        {% endfor %}
+                    {% endwith %}
+                </p>
+                <p class="mb-0"><strong>Комментарий:</strong> {{ review.comment }}</p>
+            </div>
         </div>
     {% endfor %}
 {% else %}
-    <p>Пока нет отзывов.</p>
+    <p class="{% if request.COOKIES.theme == 'dark' %}text-light{% else %}text-muted{% endif %}">Пока нет отзывов.</p>
 {% endif %}
 
-<a href="{% url 'dashboard' %}" class="btn btn-secondary mt-3">← На главную</a>
+<a href="{% url 'main:dashboard' %}" class="btn btn-secondary mt-4">← На главную</a>
+<a href="{% url 'main:profile_settings' %}" class="btn btn-outline-secondary mt-4">⚙️ Настройки профиля</a>
 {% endblock %}
+
+
+

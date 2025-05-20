@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-
+from django.conf import settings
+from django import forms
 
 class User(AbstractUser):
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
@@ -11,9 +12,17 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
 
+    def get_role(self):
+        if self.is_client:
+            return "Заказчик"
+        elif self.is_freelancer:
+            return "Фрилансер"
+        return "Пользователь"
+
 
 class Project(models.Model):
     client = models.ForeignKey(User, on_delete=models.CASCADE, related_name='projects')
+    is_completed = models.BooleanField(default=False)
     title = models.CharField(max_length=200)
     description = models.TextField()
     budget = models.DecimalField(max_digits=10, decimal_places=2)
@@ -58,5 +67,24 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'{self.author.username}: {self.text[:30]}'
+
+
+class Message(models.Model):
+    project = models.ForeignKey(Project, related_name="messages", on_delete=models.CASCADE)
+    sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="sent_messages")
+    receiver = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="received_messages", null=True, blank=True)  # ← добавь null и blank
+    text = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.sender} → {self.receiver}: {self.text[:20]}"
+
+
+
+class MessageForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = ['text']
+
 
 

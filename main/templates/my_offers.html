@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Мои отклики{% endblock %}
+
+{% block content %}
+<h2>Мои отклики</h2>
+
+{% if offers %}
+    {% for offer in offers %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5><a href="{% url 'main:project_detail' offer.project.pk %}">{{ offer.project.title }}</a></h5>
+                <p>{{ offer.proposal_text }}</p>
+                <p><strong>Цена:</strong> {{ offer.proposed_price }} ₸</p>
+                <small class="text-muted">Отправлен: {{ offer.created_at|date:"d.m.Y H:i" }}</small>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>Вы ещё не оставляли откликов.</p>
+{% endif %}
+
+<a class="btn btn-secondary mt-3" href="{% url 'main:dashboard' %}">← Назад</a>
+{% endblock %}

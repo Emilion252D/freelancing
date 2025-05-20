@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Чат по проекту{% endblock %}
+
+{% block content %}
+<h2 class="mb-3">Чат по проекту: {{ project.title }}</h2>
+<h5>Чат с {{ project.executor.username }}</h5>
+
+<div class="card mb-3 p-3" style="max-height: 400px; overflow-y: auto;">
+    {% if messages %}
+        {% for msg in messages %}
+            <div class="mb-2">
+                <strong>{{ msg.sender.username }}:</strong>
+                <span>{{ msg.text }}</span>
+                <div class="text-muted small">{{ msg.timestamp|date:"d.m.Y H:i" }}</div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-muted">Пока сообщений нет.</p>
+    {% endif %}
+</div>
+
+<form method="post" class="chat-form mt-3">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Отправить</button>
+</form>
+    <a href="{% url 'main:project_detail' project.pk %}" class="btn btn-secondary mt-4">← Назад к проекту</a>
+{% endblock %}
+

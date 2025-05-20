@@ -7,8 +7,8 @@
     <div class="card shadow p-5 rounded-4">
         <h1 class="display-4 mb-4">Добро пожаловать на <span class="text-primary">фриланс платформу!</span></h1>
         <p class="lead mb-4">Найдите клиентов или исполнителей прямо сейчас.</p>
-        <a href="{% url 'register' %}" class="btn btn-success btn-lg me-3">Регистрация</a>
-        <a href="{% url 'login' %}" class="btn btn-outline-primary btn-lg">Вход</a>
+        <a href="{% url 'main:register' %}" class="btn btn-success btn-lg me-3">Регистрация</a>
+        <a href="{% url 'main:login' %}" class="btn btn-outline-primary btn-lg">Вход</a>
     </div>
 </div>
 {% endblock %}

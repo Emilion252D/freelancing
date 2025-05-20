@@ -1,13 +1,12 @@
-# main/views_api.py
-
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework import viewsets
+from rest_framework.generics import ListAPIView
 from django.contrib.auth import authenticate
 
-from .models import Project
-from .serializers import ProjectSerializer
+from .models import Project, Offer
+from .serializers import ProjectSerializer, OfferSerializer
 from .token import get_tokens_for_user
 
 
@@ -35,4 +34,16 @@ class ProjectViewSet(viewsets.ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+class MyOffersAPIView(ListAPIView):
+    """
+    Возвращает список откликов текущего пользователя.
+    """
+    serializer_class = OfferSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Offer.objects.filter(freelancer=self.request.user)
+
 

@@ -1,35 +1,32 @@
 {% extends 'base.html' %}
-{% load static %}  {# <-- ВАЖНО: добавь эту строку для работы static #}
+{% load static %}
 
 {% block title %}О нас | HustleBee{% endblock %}
 
 {% block content %}
 <div class="bg-light p-5 rounded text-center mb-5 shadow">
     <h1 class="display-4 fw-bold">Добро пожаловать на <span class="text-warning">HustleBee</span> 🐝</h1>
-    <p class="lead">Место, где талантливые фрилансеры и заказчики находят друг друга.</p>
-    <a href="{% url 'register' %}" class="btn btn-warning btn-lg mt-3 me-3">Присоединиться</a>
-    <a href="{% url 'create_project' %}" class="btn btn-outline-dark btn-lg mt-3">Разместить проект</a>
+    <p class="lead text-muted">Место, где талантливые фрилансеры и заказчики находят друг друга.</p>
+    <a href="{% url 'main:register' %}" class="btn btn-warning btn-lg mt-3 me-3">Присоединиться</a>
+    <a href="{% url 'main:create_project' %}" class="btn btn-outline-dark btn-lg mt-3">Разместить проект</a>
 </div>
 
 <div class="row mb-5">
     <div class="col-md-6">
-        <img src="{% static 'img/teamwork.png' %}" class="img-fluid rounded" alt="Freelance teamwork">
+        <img src="{% static 'img/teamwork.png' %}" class="img-fluid rounded shadow" alt="Freelance teamwork">
     </div>
     <div class="col-md-6">
-        <h2 class="fw-bold">🐝 Наша миссия</h2>
+        <h2 class="fw-bold mb-3">🐝 Наша миссия</h2>
         <p>Объединить талантливых специалистов с теми, кто ищет качественное выполнение задач. Мы верим, что гибкая удалённая работа — это будущее, и мы строим его уже сегодня.</p>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">🔧 Тысячи проектов в разных сферах</li>
             <li class="list-group-item">💼 Гибкий график и свобода действий</li>
             <li class="list-group-item">🛡️ Система рейтингов и безопасных сделок</li>
             <li class="list-group-item">💬 Прямое общение без посредников</li>
+            <h3 class="mb-3">Готовы начать?</h3>
+            <a href="{% url 'main:dashboard' %}" class="btn btn-secondary mt-4">← На главную</a>
         </ul>
     </div>
 </div>
-
-<div class="text-center">
-    <h3 class="mb-3">Готовы начать?</h3>
-    <a href="{% url 'register' %}" class="btn btn-success btn-lg me-3">Стать фрилансером</a>
-    <a href="{% url 'create_project' %}" class="btn btn-primary btn-lg">Нанять исполнителя</a>
-</div>
 {% endblock %}
+

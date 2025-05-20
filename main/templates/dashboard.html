@@ -7,8 +7,9 @@
     <div class="card shadow p-5 rounded-4">
         <h1 class="display-5 mb-4">Привет, {{ user.username }} 👋</h1>
         <p class="lead mb-4">Что хочешь сделать?</p>
-        <a href="{% url 'create_project' %}" class="btn btn-success btn-lg me-3">➕ Добавить проект</a>
-        <a href="{% url 'project_list' %}" class="btn btn-outline-primary btn-lg">📂 Посмотреть проекты</a>
+        <a href="{% url 'main:create_project' %}" class="btn btn-success btn-lg me-0">➕ Добавить проект</a>
+        <a href="{% url 'main:project_list' %}" class="btn btn-outline-primary btn-lg">📂 Посмотреть проекты</a>
+        <a href="{% url 'main:my_offers' %}" class="btn btn-my-offers">📄 Мои отклики</a>
     </div>
 </div>
 {% endblock %}

@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="card shadow-sm p-4 mb-4">
-    <h2>{{ project.title }}</h2>
+    <h2 class="mb-3">{{ project.title }}</h2>
     <p><strong>Описание:</strong> {{ project.description }}</p>
     <p><strong>Бюджет:</strong> {{ project.budget }} ₸</p>
     <p><strong>Дедлайн:</strong> {{ project.deadline }}</p>
@@ -12,35 +12,68 @@
         <p><strong>Исполнитель:</strong> {{ project.executor.username }}</p>
     {% endif %}
 
-    {% if request.user == project.owner %}
-        <a class="btn btn-outline-primary" href="{% url 'edit_project' project.pk %}">Редактировать</a>
-        <a class="btn btn-outline-danger" href="{% url 'delete_project' project.pk %}">Удалить</a>
+    {% if request.user == project.client %}
+        <div class="d-flex gap-2 mt-3">
+            <a class="btn btn-outline-primary" href="{% url 'main:edit_project' project.pk %}">Редактировать</a>
+            <a class="btn btn-outline-danger" href="{% url 'main:delete_project' project.pk %}">Удалить</a>
+        </div>
+
+        {% if not project.is_completed %}
+            <form method="post" action="{% url 'main:complete_project' project.pk %}" class="mt-2">
+                {% csrf_token %}
+                <button class="btn btn-outline-success">✅ Завершить проект</button>
+            </form>
+        {% else %}
+            <div class="alert alert-success mt-2">Проект завершён.</div>
+        {% endif %}
     {% endif %}
+
+{% if project.is_completed and request.user == project.client or request.user == project.executor %}
+    {% if request.user == project.client %}
+        <a href="{% url 'main:leave_review' user_id=project.executor.id project_id=project.id %}" class="btn btn-warning mt-2">
+            ✍️ Оставить отзыв исполнителю
+        </a>
+    {% elif request.user == project.executor %}
+        <a href="{% url 'main:leave_review' user_id=project.client.id project_id=project.id %}" class="btn btn-warning mt-2">
+            ✍️ Оставить отзыв заказчику
+        </a>
+    {% endif %}
+{% endif %}
 </div>
 
-{% if form %}
+{% if offer_form %}
     <div class="card p-4 mb-4">
         <h4>Оставить отклик</h4>
         <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ offer_form.as_p }}
             <button type="submit" class="btn btn-primary">Отправить отклик</button>
         </form>
     </div>
+{% elif user.is_authenticated and not project.executor and has_applied %}
+    <div class="alert alert-info">Вы уже отправили отклик на этот проект.</div>
 {% endif %}
 
 {% if offers %}
-    <div class="mt-5">
+    <div class="mt-4">
         <h4>Отклики:</h4>
         {% for offer in offers %}
             <div class="card mb-2">
                 <div class="card-body">
-                    <p><strong>{{ offer.freelancer.username }}</strong> предложил: <b>{{ offer.proposed_price }} ₸</b></p>
+                    <p>
+                        <strong>{{ offer.freelancer.username }}</strong>
+                        {% if offer.freelancer.is_client %}
+                            <span class="badge bg-info">Заказчик</span>
+                        {% elif offer.freelancer.is_freelancer %}
+                            <span class="badge bg-success">Фрилансер</span>
+                        {% endif %}
+                        предложил: <b>{{ offer.proposed_price }} ₸</b>
+                    </p>
                     <p>{{ offer.proposal_text }}</p>
-                    <small class="text-muted">{{ offer.created_at }}</small>
+                    <small class="text-muted">{{ offer.created_at|date:"d.m.Y H:i" }}</small>
 
-                    {% if request.user == project.owner and not project.executor %}
-                        <form method="post" action="{% url 'accept_offer' offer.pk %}">
+                    {% if request.user == project.client and not project.executor %}
+                        <form method="post" action="{% url 'main:accept_offer' offer.pk %}">
                             {% csrf_token %}
                             <button class="btn btn-sm btn-success mt-2">Принять</button>
                         </form>
@@ -49,35 +82,46 @@
             </div>
         {% endfor %}
     </div>
+{% else %}
+    <p>Пока нет откликов.</p>
 {% endif %}
 
-{% if request.user == project.owner or request.user == project.executor %}
-    <a class="btn btn-outline-secondary mt-3" href="{% url 'project_chat' project.pk %}">💬 Перейти в чат</a>
+{% if can_chat %}
+    <a class="btn btn-outline-secondary mt-3" href="{% url 'main:project_chat' project.pk %}">💬 Перейти в чат</a>
 {% endif %}
 
 <hr>
 
-<h3>Комментарии</h3>
+<h4 class="mt-5">Комментарии</h4>
 {% for comment in comments %}
-    <div class="mb-2">
-        <strong>{{ comment.author.username }}</strong> — {{ comment.created_at|date:"d.m.Y H:i" }}<br>
-        {{ comment.text }}
+    <div class="mb-3 border rounded p-3">
+        <strong>{{ comment.author.username }}</strong>
+        {% if comment.author.is_client %}
+            <span class="badge bg-info">Заказчик</span>
+        {% elif comment.author.is_freelancer %}
+            <span class="badge bg-success">Фрилансер</span>
+        {% endif %}
+        <div class="small text-muted">{{ comment.created_at|date:"d.m.Y H:i" }}</div>
+        <div>{{ comment.text }}</div>
     </div>
 {% empty %}
-    <p>Комментариев пока нет.</p>
+    <p class="text-muted">Комментариев пока нет.</p>
 {% endfor %}
 
 {% if user.is_authenticated %}
-    <form method="post">
-        {% csrf_token %}
-        {{ comment_form.as_p }}
-        <button type="submit" class="btn btn-primary">Добавить комментарий</button>
-    </form>
+    <div class="card p-4 mt-3">
+        <form method="post">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <button type="submit" class="btn btn-primary">Добавить комментарий</button>
+        </form>
+    </div>
 {% else %}
-    <p><a href="{% url 'login' %}">Войдите</a>, чтобы оставить комментарий.</p>
+    <p><a href="{% url 'main:login' %}">Войдите</a>, чтобы оставить комментарий.</p>
 {% endif %}
 
-<a class="btn btn-link mt-3" href="{% url 'project_list' %}">← Назад</a>
+<a class="btn btn-secondary mt-3" href="{% url 'main:project_list' %}">← Назад к списку</a>
 {% endblock %}
+
 
 

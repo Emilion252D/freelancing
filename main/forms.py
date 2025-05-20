@@ -3,8 +3,9 @@
 from django import forms
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import User, Project, Offer, Review, Comment
+from .models import User, Project, Offer, Review, Comment, Message
 from django.contrib.auth import get_user_model
+from django.utils import timezone
 
 User = get_user_model()
 
@@ -37,6 +38,12 @@ class LoginForm(AuthenticationForm):
 
 
 class ProjectForm(forms.ModelForm):
+    def clean_deadline(self):
+        deadline = self.cleaned_data.get('deadline')
+        if deadline and deadline < timezone.now().date():
+            raise forms.ValidationError("Дедлайн не может быть в прошлом.")
+        return deadline
+
     class Meta:
         model = Project
         fields = ['title', 'description', 'budget', 'deadline']
@@ -62,3 +69,13 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['text']
+
+class MessageForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = ['text']
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'avatar', 'bio']

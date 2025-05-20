@@ -2,7 +2,7 @@
 {% block title %}Список проектов{% endblock %}
 
 {% block content %}
-<h1 class="mb-4">Все проекты</h1>
+<h2 class="mb-4">📋 Все доступные проекты</h2>
 
 <!-- 🔍 Форма поиска и фильтрации -->
 <form method="get" class="row g-3 mb-4">
@@ -19,33 +19,53 @@
                placeholder="Макс. бюджет" value="{{ max_budget }}">
     </div>
     <div class="col-md-2">
-        <button type="submit" class="btn btn-primary w-100">Найти</button>
+        <button type="submit" class="btn btn-primary w-100"><i class="bi bi-search"></i> Найти</button>
     </div>
     <div class="col-md-2">
-        <a href="{% url 'project_list' %}" class="btn btn-secondary w-100">Сброс</a>
+        <a href="{% url 'main:project_list' %}" class="btn btn-secondary w-100"><i class="bi bi-arrow-clockwise"></i> Сброс</a>
     </div>
 </form>
 
-<!-- 🧾 Список проектов -->
-<div class="row">
+<!-- 📦 Список проектов -->
+{% if projects %}
+<div class="row row-cols-1 row-cols-md-2 g-4">
     {% for project in projects %}
-        <div class="col-md-6">
-            <div class="card mb-4 shadow-sm">
-                <div class="card-body">
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body d-flex flex-column">
                     <h5 class="card-title">
-                        <a href="{% url 'project_detail' project.pk %}">{{ project.title }}</a>
+                        <a href="{% url 'main:project_detail' project.pk %}" class="text-decoration-none">{{ project.title }}</a>
                     </h5>
-                    <p class="card-text">{{ project.description|truncatewords:20 }}</p>
-                    <p class="text-muted">Бюджет: {{ project.budget }} ₸</p>
-                    <p class="text-muted">Дедлайн: {{ project.deadline }}</p>
+                    <p class="card-text text-truncate">{{ project.description }}</p>
+
+                    <ul class="list-unstyled small mt-3 mb-4">
+                        <li><strong>Бюджет:</strong> {{ project.budget }} ₸</li>
+                        <li><strong>Дедлайн:</strong> {{ project.deadline }}</li>
+                        <li><strong>Клиент:</strong> {{ project.client.username }}
+                            {% if project.client.is_client %}
+                                <span class="badge bg-info">Заказчик</span>
+                            {% elif project.client.is_freelancer %}
+                                <span class="badge bg-success">Фрилансер</span>
+                            {% endif %}
+                        </li>
+                    </ul>
+
+                    <a href="{% url 'main:project_detail' project.pk %}" class="btn btn-outline-primary mt-auto w-100">🔍 Подробнее</a>
                 </div>
             </div>
         </div>
-    {% empty %}
-        <p>Пока нет проектов.</p>
     {% endfor %}
 </div>
+{% else %}
+    <p class="text-muted">Нет проектов по заданным параметрам.</p>
+{% endif %}
 
-<a class="btn btn-primary" href="{% url 'create_project' %}">+ Новый проект</a>
+<hr class="my-4">
+
+<div class="text-end">
+    <a class="btn btn-success" href="{% url 'main:create_project' %}">➕ Новый проект</a>
+    <a href="{% url 'main:dashboard' %}" class="btn btn-secondary mt-0">← На главную</a>
+</div>
 {% endblock %}
+
 

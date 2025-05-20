@@ -6,33 +6,16 @@
     <title>{% block title %}Freelance Platform{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <style>
-        body.dark-mode {
-            background-color: #121212;
-            color: #f5f5f5;
-        }
-
-        .dark-mode .card,
-        .dark-mode .navbar,
-        .dark-mode .btn {
-            background-color: #1e1e1e !important;
-            color: #f5f5f5 !important;
-        }
-
-        .theme-toggle {
-            cursor: pointer;
-            color: #fff;
-            font-size: 1.2rem;
-            margin-left: 15px;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <body class="{% if request.COOKIES.theme == 'dark' %}dark-mode{% endif %}">
 </head>
+
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'dashboard' %}">
-            <img src="{% static 'img/logo.png' %}"  height="65">
+        <a class="navbar-brand" href="{% url 'main:dashboard' %}">
+            <img src="{% static 'img/logo.png' %}" height="65">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
@@ -41,33 +24,22 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'project_list' %}">Проекты</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'about' %}">О нас</a>
-                </li>
-
+                <li class="nav-item"><a class="nav-link" href="{% url 'main:project_list' %}">Проекты</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'main:about' %}">О нас</a></li>
                 {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'profile' %}">Профиль</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'main:profile' %}">Профиль</a></li>
                     <li class="nav-item">
                         <form action="{% url 'logout' %}" method="post" class="d-inline">
                             {% csrf_token %}
-                            <button type="submit" class="nav-link btn btn-link"
-                                    style="color: #fff; padding: 0; margin: 0; border: none; background: none;">
+                            <button type="submit" class="nav-link btn btn-link "
+                                    style="color: #fff; padding: 1; margin: 0; border: none; background: none;">
                                 Выйти
                             </button>
                         </form>
                     </li>
                 {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Вход</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'register' %}">Регистрация</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Вход</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'main:register' %}">Регистрация</a></li>
                 {% endif %}
                 <li class="nav-item">
                     <span class="nav-link theme-toggle" onclick="toggleTheme()">
@@ -80,6 +52,17 @@
 </nav>
 
 <div class="container mt-4">
+    {% if messages %}
+        <div class="container mt-3">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     {% block content %}
     {% endblock %}
 </div>
@@ -103,6 +86,7 @@
         }
     });
 </script>
+<script src="{% static 'scripts.js' %}"></script>
 </body>
 </html>
 

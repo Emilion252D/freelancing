@@ -1,15 +1,36 @@
 {% extends 'base.html' %}
-{% block title %}Удалить проект{% endblock %}
+{% block title %}Управление проектом{% endblock %}
 
 {% block content %}
-<div class="alert alert-warning">
-    <h4>Удалить проект?</h4>
-    <p>Вы действительно хотите удалить <strong>{{ project.title }}</strong>?</p>
+<div class="card p-4 shadow-sm">
+    <h4 class="mb-3">Выберите действие с проектом:</h4>
+    <p><strong>{{ project.title }}</strong></p>
 
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Да, удалить</button>
-        <a href="{% url 'project_detail' project.pk %}" class="btn btn-secondary">Отмена</a>
-    </form>
+    <div class="alert alert-warning">
+        <h5>Удалить проект</h5>
+        <p>Вы действительно хотите <strong>удалить</strong> проект <strong>{{ project.title }}</strong>? Это действие нельзя отменить.</p>
+        <form method="post" action="{% url 'main:delete_project' project.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger me-2">Да, удалить</button>
+            <a href="{% url 'main:project_detail' project.pk %}" class="btn btn-secondary">Отмена</a>
+        </form>
+    </div>
+
+    {% if not project.completed %}
+        <hr>
+        <div class="alert alert-success">
+            <h5>Завершить проект</h5>
+            <p>Вы также можете завершить проект, если работа уже выполнена.</p>
+            <form method="post" action="{% url 'main:complete_project' project.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success me-2">Завершить</button>
+                <a href="{% url 'main:project_detail' project.pk %}" class="btn btn-outline-secondary">Назад</a>
+            </form>
+        </div>
+    {% else %}
+        <div class="alert alert-info mt-3">
+            Этот проект уже отмечен как завершён ✅
+        </div>
+    {% endif %}
 </div>
 {% endblock %}

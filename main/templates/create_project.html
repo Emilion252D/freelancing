@@ -1,13 +1,40 @@
 {% extends 'base.html' %}
+{% load form_tags %}  {# Фильтр add_class для стилизации форм #}
+
 {% block title %}Создать проект{% endblock %}
 
 {% block content %}
-<h2 class="mb-4">{% if project %}Редактировать{% else %}Создать{% endif %} проект</h2>
+<div class="container mt-5">
+    <div class="card shadow p-4">
+        <h2 class="mb-4 text-center">
+            {% if project %}Редактировать{% else %}Создать{% endif %} проект
+        </h2>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Сохранить</button>
-    <a class="btn btn-secondary" href="{% url 'project_list' %}">Отмена</a>
-</form>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_title" class="form-label">Название проекта</label>
+                {{ form.title|add_class:"form-control" }}
+            </div>
+            <div class="mb-3">
+                <label for="id_description" class="form-label">Описание</label>
+                {{ form.description|add_class:"form-control" }}
+            </div>
+            <div class="mb-3">
+                <label for="id_budget" class="form-label">Бюджет (₸)</label>
+                {{ form.budget|add_class:"form-control" }}
+            </div>
+            <div class="mb-3">
+                <label for="id_deadline" class="form-label">Дедлайн</label>
+                {{ form.deadline|add_class:"form-control" }}
+            </div>
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-success">Сохранить</button>
+                <a href="{% url 'main:project_list' %}" class="btn btn-secondary">Отмена</a>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}
+
+
