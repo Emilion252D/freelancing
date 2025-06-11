@@ -1,0 +1,611 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-03 18:26+0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\main\templates\about.html:5
+msgid "About Us | HustleBee"
+msgstr "О нас | HustleBee"
+
+#: .\main\templates\about.html:10
+msgid "Welcome to <span class=\"text-warning\">HustleBee</span> 🐝"
+msgstr "Добро пожаловать в <span class=\"text-warning\">HustleBee</span> 🐝"
+
+#: .\main\templates\about.html:12
+msgid "A place where talented freelancers and clients find each other."
+msgstr "Место, где талантливые фрилансеры и клиенты находят друг друга."
+
+#: .\main\templates\about.html:13
+msgid "Join Now"
+msgstr "Присоединиться"
+
+#: .\main\templates\about.html:14
+msgid "Post a Project"
+msgstr "Разместить проект"
+
+#: .\main\templates\about.html:19
+msgid "Freelance teamwork"
+msgstr "Командная работа фрилансеров"
+
+#: .\main\templates\about.html:22
+msgid "Our Mission"
+msgstr "Наша миссия"
+
+#: .\main\templates\about.html:24
+msgid ""
+"To connect talented professionals with those seeking quality work. We "
+"believe flexible remote work is the future, and we're building it today."
+msgstr ""
+"Соединять талантливых профессионалов с теми, кто ищет качественную работу. Мы "
+"верим, что гибкая удаленная работа — это будущее, и мы строим его уже сегодня."
+
+#: .\main\templates\about.html:27
+msgid "Thousands of projects in various fields"
+msgstr "Тысячи проектов в различных сферах"
+
+#: .\main\templates\about.html:28
+msgid "Flexible schedule and freedom of action"
+msgstr "Гибкий график и свобода действий"
+
+#: .\main\templates\about.html:29
+msgid "Rating system and secure transactions"
+msgstr "Рейтинговая система и безопасные транзакции"
+
+#: .\main\templates\about.html:30
+msgid "Direct communication without intermediaries"
+msgstr "Прямое общение без посредников"
+
+#: .\main\templates\about.html:31
+msgid "Ready to get started?"
+msgstr "Готовы начать?"
+
+#: .\main\templates\about.html:32
+msgid "Back to Home"
+msgstr "Вернуться на главную"
+
+#: .\main\templates\base.html:7
+msgid "Freelance Platform"
+msgstr "Фриланс-платформа"
+
+#: .\main\templates\base.html:154
+msgid "Toggle navigation"
+msgstr "Переключить навигацию"
+
+#: .\main\templates\base.html:159
+msgid "Projects"
+msgstr "Проекты"
+
+#: .\main\templates\base.html:160
+msgid "About Us"
+msgstr "О нас"
+
+#: .\main\templates\base.html:162 .\main\templates\profile.html:6
+msgid "Profile"
+msgstr "Профиль"
+
+#: .\main\templates\base.html:168 .\main\templates\logout.html:4
+msgid "Logout"
+msgstr "Выйти"
+
+#: .\main\templates\base.html:173 .\main\templates\index.html:20
+#: .\main\templates\login.html:8 .\main\templates\register.html:30
+#: .\main\templates\registration\login.html:8 .\main\templates\welcome.html:14
+msgid "Login"
+msgstr "Войти"
+
+#: .\main\templates\base.html:174 .\main\templates\index.html:19
+#: .\main\templates\login.html:30 .\main\templates\registration\login.html:30
+#: .\main\templates\welcome.html:13
+msgid "Register"
+msgstr "Зарегистрироваться"
+
+#: .\main\templates\base.html:192
+msgid "Close"
+msgstr "Закрыть"
+
+#: .\main\templates\chat.html:3
+msgid "Project Chat"
+msgstr "Чат проекта"
+
+#: .\main\templates\chat.html:6 .\main\templates\project_chat.html:4
+#, python-format
+msgid "Project Chat: %(project.title)s"
+msgstr "Чат проекта: %(project.title)s"
+
+#: .\main\templates\chat.html:7
+#, python-format
+msgid "Chat with %(project.executor.username)s"
+msgstr "Чат с %(project.executor.username)s"
+
+#: .\main\templates\chat.html:19 .\main\templates\project_chat.html:23
+msgid "No messages yet."
+msgstr "Пока нет сообщений."
+
+#: .\main\templates\chat.html:26 .\main\templates\project_chat.html:30
+#: .\main\templates\registration\password_reset_form.html:14
+msgid "Send"
+msgstr "Отправить"
+
+#: .\main\templates\chat.html:28
+msgid "Back to project"
+msgstr "Назад к проекту"
+
+#: .\main\templates\create_project.html:5 .\main\templates\edit_project.html:4
+#: .\main\templates\edit_project.html:11
+msgid "Create Project"
+msgstr "Создать проект"
+
+#: .\main\templates\create_project.html:11
+#: .\main\templates\project_detail.html:19
+msgid "Edit"
+msgstr "Редактировать"
+
+#: .\main\templates\create_project.html:11
+msgid "Create"
+msgstr "Создать"
+
+#: .\main\templates\create_project.html:11 .\main\templates\profile.html:71
+msgid "Project"
+msgstr "Проект"
+
+#: .\main\templates\create_project.html:17
+msgid "Project Title"
+msgstr "Название проекта"
+
+#: .\main\templates\create_project.html:21
+msgid "Description"
+msgstr "Описание"
+
+#: .\main\templates\create_project.html:25
+msgid "Budget (₸)"
+msgstr "Бюджет (₸)"
+
+#: .\main\templates\create_project.html:29
+msgid "Deadline"
+msgstr "Срок"
+
+#: .\main\templates\create_project.html:33
+#: .\main\templates\edit_project.html:18
+#: .\main\templates\profile_settings.html:12
+msgid "Save"
+msgstr "Сохранить"
+
+#: .\main\templates\create_project.html:34
+#: .\main\templates\delete_project.html:19
+#: .\main\templates\edit_project.html:19
+msgid "Cancel"
+msgstr "Отмена"
+
+#: .\main\templates\dashboard.html:4
+msgid "User Dashboard"
+msgstr "Панель пользователя"
+
+#: .\main\templates\dashboard.html:9
+#, python-format
+msgid "Hi, %(user.username)s 👋"
+msgstr "Привет, %(user.username)s 👋"
+
+#: .\main\templates\dashboard.html:10
+msgid "What do you want to do?"
+msgstr "Что вы хотите сделать?"
+
+#: .\main\templates\dashboard.html:12 .\main\templates\index.html:16
+msgid "Add Project"
+msgstr "Добавить проект"
+
+#: .\main\templates\dashboard.html:13 .\main\templates\index.html:17
+msgid "View Projects"
+msgstr "Просмотреть проекты"
+
+#: .\main\templates\dashboard.html:14 .\main\templates\my_offers.html:4
+#: .\main\templates\my_offers.html:7
+msgid "My Offers"
+msgstr "Мои предложения"
+
+#: .\main\templates\delete_project.html:4
+msgid "Manage Project"
+msgstr "Управление проектом"
+
+#: .\main\templates\delete_project.html:8
+msgid "Choose an action for the project:"
+msgstr "Выберите действие для проекта:"
+
+#: .\main\templates\delete_project.html:12
+msgid "Delete Project"
+msgstr "Удалить проект"
+
+#: .\main\templates\delete_project.html:13
+#, python-format
+msgid ""
+"\n"
+"        Do you really want to <strong>delete</strong> the project "
+"<strong>%(title)s</strong>? This action cannot be undone.\n"
+"        "
+msgstr ""
+"\n"
+"        Вы действительно хотите <strong>удалить</strong> проект "
+"<strong>%(title)s</strong>? Это действие нельзя отменить.\n"
+"        "
+
+#: .\main\templates\delete_project.html:18
+msgid "Yes, delete"
+msgstr "Да, удалить"
+
+#: .\main\templates\delete_project.html:26
+msgid "Complete Project"
+msgstr "Завершить проект"
+
+#: .\main\templates\delete_project.html:27
+msgid "You can also mark the project as complete if the work is done."
+msgstr "Вы также можете отметить проект как завершенный, если работа выполнена."
+
+#: .\main\templates\delete_project.html:30
+msgid "Complete"
+msgstr "Завершить"
+
+#: .\main\templates\delete_project.html:31 .\main\templates\my_offers.html:26
+msgid "Back"
+msgstr "Назад"
+
+#: .\main\templates\delete_project.html:36
+msgid "This project is already marked as completed ✅"
+msgstr "Этот проект уже отмечен как завершенный ✅"
+
+#: .\main\templates\edit_project.html:9
+msgid "Edit Project"
+msgstr "Редактировать проект"
+
+#: .\main\templates\index.html:8
+msgid "Welcome to the <span class=\"text-primary\">freelance platform!</span>"
+msgstr "Добро пожаловать на <span class=\"text-primary\">фриланс-платформу!</span>"
+
+#: .\main\templates\index.html:10 .\main\templates\welcome.html:12
+msgid "Find clients or freelancers right now."
+msgstr "Найдите клиентов или фрилансеров прямо сейчас."
+
+#: .\main\templates\index.html:14
+#, python-format
+msgid "Hi, %(username)s 👋"
+msgstr "Привет, %(username)s 👋"
+
+#: .\main\templates\leave_review.html:4
+msgid "Leave a Review"
+msgstr "Оставить отзыв"
+
+#: .\main\templates\leave_review.html:9
+#, python-format
+msgid "Leave a review for %(username)s"
+msgstr "Оставить отзыв для %(username)s"
+
+#: .\main\templates\leave_review.html:14
+msgid "Submit Review"
+msgstr "Отправить отзыв"
+
+#: .\main\templates\leave_review.html:16 .\main\templates\profile.html:93
+#: .\main\templates\project_list.html:70
+msgid "Back to Dashboard"
+msgstr "Вернуться в панель"
+
+#: .\main\templates\login.html:4 .\main\templates\register.html:4
+#: .\main\templates\register.html:8 .\main\templates\registration\login.html:4
+msgid "Login / Registration"
+msgstr "Вход / Регистрация"
+
+#: .\main\templates\login.html:12 .\main\templates\register.html:12
+#: .\main\templates\registration\login.html:12
+msgid "Please correct the errors in the form."
+msgstr "Пожалуйста, исправьте ошибки в форме."
+
+#: .\main\templates\login.html:27 .\main\templates\register.html:27
+#: .\main\templates\registration\login.html:27
+msgid "Submit"
+msgstr "Отправить"
+
+#: .\main\templates\logout.html:8
+msgid "You have successfully logged out."
+msgstr "Вы успешно вышли из системы."
+
+#: .\main\templates\logout.html:9
+msgid "Thank you for being with us!"
+msgstr "Спасибо, что были с нами!"
+
+#: .\main\templates\logout.html:10
+msgid "Log in again"
+msgstr "Войти снова"
+
+#: .\main\templates\my_offers.html:15
+msgid "Price:"
+msgstr "Цена:"
+
+#: .\main\templates\my_offers.html:17
+#, python-format
+msgid "Submitted: %(offer.created_at|date:\"d.m.Y H:i\")s"
+msgstr "Отправлено: %(offer.created_at|date:\"d.m.Y H:i\")s"
+
+#: .\main\templates\my_offers.html:23
+msgid "You haven't submitted any offers yet."
+msgstr "Вы еще не отправили ни одного предложения."
+
+#: .\main\templates\profile.html:13
+msgid "Avatar"
+msgstr "Аватар"
+
+#: .\main\templates\profile.html:15
+msgid "No avatar"
+msgstr "Нет аватара"
+
+#: .\main\templates\profile.html:23
+msgid "Email"
+msgstr "Email"
+
+#: .\main\templates\profile.html:24
+msgid "First Name"
+msgstr "Имя"
+
+#: .\main\templates\profile.html:24 .\main\templates\profile.html:25
+msgid "(not provided)"
+msgstr "(не указано)"
+
+#: .\main\templates\profile.html:25
+msgid "Last Name"
+msgstr "Фамилия"
+
+#: .\main\templates\profile.html:28
+msgid "About"
+msgstr "О себе"
+
+#: .\main\templates\profile.html:36
+msgid "Average rating"
+msgstr "Средний рейтинг"
+
+#: .\main\templates\profile.html:55 .\main\templates\profile.html:90
+msgid "No reviews yet."
+msgstr "Пока нет отзывов."
+
+#: .\main\templates\profile.html:60
+msgid "Leave a review"
+msgstr "Оставить отзыв"
+
+#: .\main\templates\profile.html:65
+msgid "Reviews"
+msgstr "Отзывы"
+
+#: .\main\templates\profile.html:70
+msgid "From"
+msgstr "От"
+
+#: .\main\templates\profile.html:72
+msgid "Rating"
+msgstr "Рейтинг"
+
+#: .\main\templates\profile.html:85
+msgid "Comment"
+msgstr "Комментарий"
+
+#: .\main\templates\profile.html:94 .\main\templates\profile_settings.html:4
+#: .\main\templates\profile_settings.html:7
+msgid "Profile Settings"
+msgstr "Настройки профиля"
+
+#: .\main\templates\project_chat.html:9
+#, python-format
+msgid "Chat with %(user)s"
+msgstr "Чат с %(user)s"
+
+#: .\main\templates\project_detail.html:9
+msgid "Description:"
+msgstr "Описание:"
+
+#: .\main\templates\project_detail.html:10
+#: .\main\templates\project_list.html:45
+msgid "Budget:"
+msgstr "Бюджет:"
+
+#: .\main\templates\project_detail.html:11
+#: .\main\templates\project_list.html:46
+msgid "Deadline:"
+msgstr "Срок:"
+
+#: .\main\templates\project_detail.html:14
+msgid "Executor:"
+msgstr "Исполнитель:"
+
+#: .\main\templates\project_detail.html:20
+msgid "Delete"
+msgstr "Удалить"
+
+#: .\main\templates\project_detail.html:26
+msgid "Mark as Completed"
+msgstr "Отметить как завершенный"
+
+#: .\main\templates\project_detail.html:29
+msgid "The project is completed."
+msgstr "Проект завершен."
+
+#: .\main\templates\project_detail.html:36
+msgid "Leave a review for the executor"
+msgstr "Оставить отзыв для исполнителя"
+
+#: .\main\templates\project_detail.html:40
+msgid "Leave a review for the client"
+msgstr "Оставить отзыв для клиента"
+
+#: .\main\templates\project_detail.html:48
+msgid "Submit a Proposal"
+msgstr "Отправить предложение"
+
+#: .\main\templates\project_detail.html:52
+msgid "Send Proposal"
+msgstr "Отправить предложение"
+
+#: .\main\templates\project_detail.html:56
+msgid "You have already sent a proposal for this project."
+msgstr "Вы уже отправили предложение для этого проекта."
+
+#: .\main\templates\project_detail.html:61
+msgid "Proposals:"
+msgstr "Предложения:"
+
+#: .\main\templates\project_detail.html:68
+#: .\main\templates\project_detail.html:102
+#: .\main\templates\project_list.html:49
+msgid "Client"
+msgstr "Клиент"
+
+#: .\main\templates\project_detail.html:70
+#: .\main\templates\project_detail.html:104
+#: .\main\templates\project_list.html:51
+msgid "Freelancer"
+msgstr "Фрилансер"
+
+#: .\main\templates\project_detail.html:72
+msgid "offered:"
+msgstr "предложил:"
+
+#: .\main\templates\project_detail.html:80
+msgid "Accept"
+msgstr "Принять"
+
+#: .\main\templates\project_detail.html:88
+msgid "No proposals yet."
+msgstr "Пока нет предложений."
+
+#: .\main\templates\project_detail.html:92
+msgid "Go to Chat"
+msgstr "Перейти в чат"
+
+#: .\main\templates\project_detail.html:97
+msgid "Comments"
+msgstr "Комментарии"
+
+#: .\main\templates\project_detail.html:110
+msgid "No comments yet."
+msgstr "Пока нет комментариев."
+
+#: .\main\templates\project_detail.html:118
+msgid "Add Comment"
+msgstr "Добавить комментарий"
+
+#: .\main\templates\project_detail.html:122
+#: .\main\templates\registration\password_reset_complete.html:9
+msgid "Log in"
+msgstr "Войти"
+
+#: .\main\templates\project_detail.html:122
+msgid "to leave a comment."
+msgstr "чтобы оставить комментарий."
+
+#: .\main\templates\project_detail.html:125
+msgid "Back to list"
+msgstr "Назад к списку"
+
+#: .\main\templates\project_list.html:4
+msgid "Project List"
+msgstr "Список проектов"
+
+#: .\main\templates\project_list.html:7
+msgid "All Available Projects"
+msgstr "Все доступные проекты"
+
+#: .\main\templates\project_list.html:12
+msgid "Search by title"
+msgstr "Поиск по названию"
+
+#: .\main\templates\project_list.html:15
+msgid "Min. budget"
+msgstr "Мин. бюджет"
+
+#: .\main\templates\project_list.html:18
+msgid "Max. budget"
+msgstr "Макс. бюджет"
+
+#: .\main\templates\project_list.html:22
+msgid "Search"
+msgstr "Поиск"
+
+#: .\main\templates\project_list.html:27
+msgid "Reset"
+msgstr "Сбросить"
+
+#: .\main\templates\project_list.html:47
+msgid "Client:"
+msgstr "Клиент:"
+
+#: .\main\templates\project_list.html:56
+msgid "View Details"
+msgstr "Подробнее"
+
+#: .\main\templates\project_list.html:63
+msgid "No projects found with the given criteria."
+msgstr "Проекты по заданным критериям не найдены."
+
+#: .\main\templates\project_list.html:69
+msgid "New Project"
+msgstr "Новый проект"
+
+#: .\main\templates\registration\password_reset_complete.html:4
+msgid "Password Reset Complete"
+msgstr "Сброс пароля завершен"
+
+#: .\main\templates\registration\password_reset_complete.html:8
+msgid "Your password has been successfully updated."
+msgstr "Ваш пароль успешно обновлен."
+
+#: .\main\templates\registration\password_reset_confirm.html:4
+msgid "Password Reset"
+msgstr "Сброс пароля"
+
+#: .\main\templates\registration\password_reset_confirm.html:8
+msgid "Enter a new password"
+msgstr "Введите новый пароль"
+
+#: .\main\templates\registration\password_reset_confirm.html:12
+msgid "Update Password"
+msgstr "Обновить пароль"
+
+#: .\main\templates\registration\password_reset_done.html:4
+#: .\main\templates\registration\password_reset_done.html:8
+msgid "Email Sent"
+msgstr "Письмо отправлено"
+
+#: .\main\templates\registration\password_reset_done.html:9
+msgid "Check your email — we’ve sent you a link to reset your password."
+msgstr "Проверьте вашу почту — мы отправили вам ссылку для сброса пароля."
+
+#: .\main\templates\registration\password_reset_form.html:4
+#: .\main\templates\registration\password_reset_form.html:8
+msgid "Password Recovery"
+msgstr "Восстановление пароля"
+
+#: .\main\templates\registration\password_reset_form.html:9
+msgid "Enter your email to receive a password reset link:"
+msgstr "Введите ваш email для получения ссылки на сброс пароля:"
+
+#: .\main\templates\welcome.html:4
+msgid "Welcome"
+msgstr "Добро пожаловать"
+
+#: .\main\templates\welcome.html:10
+msgid "Welcome to"
+msgstr "Добро пожаловать на"
+
+#: .\main\templates\welcome.html:10
+msgid "the freelance platform"
+msgstr "фриланс-платформу"

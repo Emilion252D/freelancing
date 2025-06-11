@@ -1,0 +1,3 @@
+[submodule "taskmanager/freelancing"]
+	path = taskmanager/freelancing
+	url = https://github.com/Emilion252D/freelancing
